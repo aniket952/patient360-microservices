@@ -13,17 +13,17 @@ import org.slf4j.LoggerFactory;
 public class BillingGrpcService extends BillingServiceImplBase{
     private static final Logger log = LoggerFactory.getLogger(BillingGrpcService.class);
 
-    @Override
-    public void CreateBillingAccount(BillingRequest billingRequest, StreamObserver<BillingResponse> responseObserver) {
-        log.info("first Create BillingAccount request recived {}", billingRequest.toString());
-
-        //Business logic
-
-        BillingResponse response = BillingResponse.newBuilder().setAccountId("1234").setStatus("Active").build();
-
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
+//    @Override
+//    public void CreateBillingAccount(BillingRequest billingRequest, StreamObserver<BillingResponse> responseObserver) {
+//        log.info("first Create BillingAccount request recived {}", billingRequest.toString());
+//
+//        //Business logic
+//
+//        BillingResponse response = BillingResponse.newBuilder().setAccountId("1234").setStatus("Active").build();
+//
+//        responseObserver.onNext(response);
+//        responseObserver.onCompleted();
+//    }
 
     @Override
     public  void createBillingAccount(BillingRequest billingRequest, StreamObserver<BillingResponse> responseObserver) {
