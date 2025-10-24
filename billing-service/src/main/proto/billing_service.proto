@@ -1,0 +1,61 @@
+// Specify the syntax version for Protocol Buffers
+// "proto3" is the latest stable syntax, simpler and widely used
+syntax = "proto3";
+
+// This option tells the compiler to generate multiple Java classes
+// (one per message/service) instead of a single outer class.
+option java_multiple_files = true;
+
+// This defines the base Java package where generated classes will be placed.
+// e.g., output files go under: src/generated/java/billing/
+option java_package = "billing";
+
+// -----------------------------
+// Define a gRPC Service
+// -----------------------------
+service BillingService {
+  // Define an RPC (Remote Procedure Call) method named CreateBillingAccount.
+  // It takes a BillingRequest message as input and returns a BillingResponse.
+  rpc CreateBillingAccount (BillingRequest) returns (BillingResponse);
+}
+
+// -----------------------------
+// Define Request and Response Messages
+// -----------------------------
+
+// The request message contains the input parameters required to create a billing account.
+message BillingRequest {
+  // The patient's unique identifier (e.g., from hospital records)
+  string patientId = 1;
+
+  // The patient's full name
+  string name = 2;
+
+  // The patient's email address
+  string email = 3;
+}
+
+// The response message contains the result of the billing account creation.
+message BillingResponse {
+  // The unique ID assigned to the new billing account
+  string accountId = 1;
+
+  // The status of the operation, e.g., "SUCCESS" or "FAILED"
+  string status = 2;
+}
+
+
+
+//    .proto file
+//    ↓
+//    protoc compiler
+//    ↓
+//    Generates Java message classes (BillingRequest, BillingResponse)
+//    ↓
+//    protoc-gen-grpc-java plugin
+//    ↓
+//    Generates service stub class (BillingServiceGrpc)
+//    ↓
+//    You implement BillingServiceImpl (your business logic)
+//    ↓
+//    Run Spring Boot gRPC server to serve requests
