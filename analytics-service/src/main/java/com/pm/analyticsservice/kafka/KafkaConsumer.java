@@ -13,7 +13,7 @@ public class KafkaConsumer {
 
     @KafkaListener(topics = "patient", groupId = "analytics-service")
     public void consumeEvent(byte[] event){
-        System.out.printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA000000000000000000000");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA000000000000000000000");
         try {
             PatientEvent patientEvent = PatientEvent.parseFrom(event);
             //Perform any business logic
