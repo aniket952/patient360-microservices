@@ -12,14 +12,13 @@ public class KafkaConsumer {
     private static final Logger log = LoggerFactory.getLogger(KafkaConsumer.class);
 
     @KafkaListener(topics = "patient", groupId = "analytics-service")
-    public void consumeEvent(byte[] event){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA000000000000000000000");
+    public void consumeEvent(byte[] event) {
         try {
             PatientEvent patientEvent = PatientEvent.parseFrom(event);
-            //Perform any business logic
-            log.info("Recived patient Event: [PatientId={}, PatientName={}, PatientEmail={}", patientEvent.getPatientId(), patientEvent.getName(), patientEvent.getEmail());
+            log.info("Received patient Event: [PatientId={}, PatientName={}, PatientEmail={}]",
+                    patientEvent.getPatientId(), patientEvent.getName(), patientEvent.getEmail());
         } catch (InvalidProtocolBufferException e) {
-            log.error("Error desearializing event {}", e.getMessage());
+            log.error("Error deserializing event: {}", e.getMessage());
         }
     }
 }
